@@ -4,7 +4,6 @@ import { CreateJwtToken,DecodedJwtToken } from "@/app/lib/component/authFunction
 import dbConnect from "@/app/lib/db/db";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { User } from "@/app/lib/db/model/AllModel";
 
 export async function POST(req) {
