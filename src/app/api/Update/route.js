@@ -1,6 +1,5 @@
 import { DecodedJwtToken } from "@/app/lib/component/authFunction/JwtHelper";
 import dbConnect from "@/app/lib/db/db";
-import User from "@/app/lib/db/model/User";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 

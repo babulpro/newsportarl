@@ -41,16 +41,16 @@ const MainNavbar = () => {
         router.push(url); // Navigate to the selected route
     };
 
-    const logOut = async () => {
-        const config = { method: "get" };
-        let response = await fetch("/api/login", config, { cache: "force-cache" });
-        let json = await response.json();
+    // const logOut = async () => {
+    //     const config = { method: "get" };
+    //     let response = await fetch("/api/login", config, { cache: "force-cache" });
+    //     let json = await response.json();
 
-        if (json.status === "ok") {
-            toast.success("Log Out Success");
-            router.replace("/");
-        }
-    };
+    //     if (json.status === "ok") {
+    //         toast.success("Log Out Success");
+    //         router.replace("/");
+    //     }
+    // };
 
     const logIn = async () => {
         router.replace("/login");
@@ -142,10 +142,10 @@ const MainNavbar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <button onClick={logIn}>Log In</button>
+                                {/* <button onClick={logIn}>Log In</button> */}
                             </li>
                             <li>
-                                <button onClick={logOut}>Log Out</button>
+                                {/* <button onClick={logOut}>Log Out</button> */}
                             </li>
                             <li>
                                 <Link href="/">Settings</Link>
