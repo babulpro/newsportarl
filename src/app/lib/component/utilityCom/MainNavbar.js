@@ -1,45 +1,52 @@
-"use client";
-import React, { useState, useEffect } from "react";
+ 
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+ 
 import Image from "next/image";
-import toast from "react-hot-toast";
 
-const MainNavbar = () => {
-    const router = useRouter();
-    const [activePath, setActivePath] = useState(""); // Tracks the currently active path
-    const [Data, setData] = useState([]);
-    const [error, setError] = useState(null);
+const getData =async()=>{
+    let res = await fetch('http://localhost:3000/api/getData/navbar',{cache:"force-cache"})
+    let data = await res.json()
+    return data.data
+}
+ 
 
-    useEffect(() => {
-        const fetchHeroData = async () => {
-            try {
-                const response = await fetch("/api/getData/navbar", { cache: "force-cache" });
+const MainNavbar =async () => {
+    let Data = await getData()
+    // const router = useRouter();
+    // const [activePath, setActivePath] = useState(""); // Tracks the currently active path
+    // const [Data, setData] = useState([]);
+    // const [error, setError] = useState(null);
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+    // useEffect(() => {
+    //     const fetchHeroData = async () => {
+    //         try {
+    //             const response = await fetch("/api/getData/navbar", { cache: "force-cache" });
 
-                const data = await response.json();
-                setData(data.data); // Assuming the API sends `{ status: "ok", data: [...] }`
-            } catch (err) {
-                console.error("Error fetching navbar data:", err);
-                setError(err.message);
-            }
-        };
+    //             if (!response.ok) {
+    //                 throw new Error(`HTTP error! status: ${response.status}`);
+    //             }
 
-        fetchHeroData();
-    }, []);
+    //             const data = await response.json();
+    //             setData(data.data); // Assuming the API sends `{ status: "ok", data: [...] }`
+    //         } catch (err) {
+    //             console.error("Error fetching navbar data:", err);
+    //             setError(err.message);
+    //         }
+    //     };
 
-    // Initialize the active path based on the current route
-    useEffect(() => {
-        setActivePath(window.location.pathname);
-    }, []);
+    //     fetchHeroData();
+    // }, []);
 
-    const handleNavClick = (url) => {
-        setActivePath(url); // Update the active path immediately
-        router.push(url); // Navigate to the selected route
-    };
+    // // Initialize the active path based on the current route
+    // useEffect(() => {
+    //     setActivePath(window.location.pathname);
+    // }, []);
+
+    // const handleNavClick = (url) => {
+    //     setActivePath(url); // Update the active path immediately
+    //     router.push(url); // Navigate to the selected route
+    // };
 
     // const logOut = async () => {
     //     const config = { method: "get" };
@@ -52,9 +59,9 @@ const MainNavbar = () => {
     //     }
     // };
 
-    const logIn = async () => {
-        router.replace("/login");
-    };
+    // const logIn = async () => {
+    //     router.replace("/login");
+    // };
 
     return (
         <div>
@@ -83,12 +90,9 @@ const MainNavbar = () => {
                         >
                             {Data.map((value) => (
                                 <li key={value._id}>
-                                    <button
-                                        className={activePath === value.url ? "text-red-500" : ""}
-                                        onClick={() => handleNavClick(value.link)}
-                                    >
+                                    <Link href={value.link}  >
                                         {value.name}
-                                    </button>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -104,16 +108,13 @@ const MainNavbar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {Data.map((value) => (
-                            <li key={value._id}>
-                                <button
-                                    className={`${
-                                        activePath === value.url ? "text-red-500" : ""
-                                    }`}
-                                    onClick={() => handleNavClick(value.link)}
-                                >
-                                    {value.name}
-                                </button>
-                            </li>
+                            
+                                 <li key={value._id}>
+                                    <Link href={value.link}  >
+                                        {value.name}
+                                    </Link>
+                                </li>
+                            
                         ))}
                     </ul>
                 </div>
