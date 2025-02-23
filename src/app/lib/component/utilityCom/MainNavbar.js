@@ -1,52 +1,49 @@
- 
-import React from "react";
+ "use client"
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
  
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const getData =async()=>{
-    let res = await fetch('http://localhost:3000/api/getData/navbar',{cache:"force-cache"})
-    let data = await res.json()
-    return data.data
-}
+ 
  
 
 const MainNavbar =async () => {
-    let Data = await getData()
-    // const router = useRouter();
-    // const [activePath, setActivePath] = useState(""); // Tracks the currently active path
-    // const [Data, setData] = useState([]);
-    // const [error, setError] = useState(null);
+     
+    const router = useRouter();
+    const [activePath, setActivePath] = useState(""); // Tracks the currently active path
+    const [Data, setData] = useState([]);
+    const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchHeroData = async () => {
-    //         try {
-    //             const response = await fetch("/api/getData/navbar", { cache: "force-cache" });
+    useEffect(() => {
+        const fetchHeroData = async () => {
+            try {
+                const response = await fetch("/api/getData/navbar", { cache: "force-cache" });
 
-    //             if (!response.ok) {
-    //                 throw new Error(`HTTP error! status: ${response.status}`);
-    //             }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-    //             const data = await response.json();
-    //             setData(data.data); // Assuming the API sends `{ status: "ok", data: [...] }`
-    //         } catch (err) {
-    //             console.error("Error fetching navbar data:", err);
-    //             setError(err.message);
-    //         }
-    //     };
+                const data = await response.json();
+                setData(data.data); // Assuming the API sends `{ status: "ok", data: [...] }`
+            } catch (err) {
+                console.error("Error fetching navbar data:", err);
+                setError(err.message);
+            }
+        };
 
-    //     fetchHeroData();
-    // }, []);
+        fetchHeroData();
+    }, []);
 
-    // // Initialize the active path based on the current route
-    // useEffect(() => {
-    //     setActivePath(window.location.pathname);
-    // }, []);
+    // Initialize the active path based on the current route
+    useEffect(() => {
+        setActivePath(window.location.pathname);
+    }, []);
 
-    // const handleNavClick = (url) => {
-    //     setActivePath(url); // Update the active path immediately
-    //     router.push(url); // Navigate to the selected route
-    // };
+    const handleNavClick = (url) => {
+        setActivePath(url); // Update the active path immediately
+        router.push(url); // Navigate to the selected route
+    };
 
     // const logOut = async () => {
     //     const config = { method: "get" };

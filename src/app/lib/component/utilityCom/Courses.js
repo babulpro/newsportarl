@@ -1,38 +1,31 @@
- 
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-const getData=async()=>{
-    const response = await fetch("http://localhost:3000/api/getData/news", { cache: "force-cache" });  
-    const data = await response.json();
-    return data.data
-} 
  
 
-const Courses = async() => {
-    let Data = await getData()
+const Courses = () => {
    
-    // const [Data, setData] = useState([]);
-    // const [error, setError] = useState(null);
+    const [Data, setData] = useState([]);
+    const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchHeroData = async () => {
-    //         try {
-    //             const response = await fetch("/api/getData/news", { cache: "force-cache" });
+    useEffect(() => {
+        const fetchHeroData = async () => {
+            try {
+                const response = await fetch("/api/getData/news", { cache: "force-cache" });
 
-    //             if (!response.ok) {
-    //                 throw new Error(`HTTP error! status: ${response.status}`);
-    //             }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-    //             const data = await response.json();
-    //             setData(data.data); // Ensure data has correct structure
-    //         } catch (err) {
-    //             setError(err.message);
-    //         }
-    //     };
+                const data = await response.json();
+                setData(data.data); // Ensure data has correct structure
+            } catch (err) {
+                setError(err.message);
+            }
+        };
 
-    //     fetchHeroData();
-    // }, []);
+        fetchHeroData();
+    }, []);
 
     return (
          
