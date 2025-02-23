@@ -1,15 +1,11 @@
- "use client"
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
- 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import toast from "react-hot-toast";
 
- 
- 
-
-const MainNavbar =async () => {
-     
+const MainNavbar = () => {
     const router = useRouter();
     const [activePath, setActivePath] = useState(""); // Tracks the currently active path
     const [Data, setData] = useState([]);
@@ -45,20 +41,20 @@ const MainNavbar =async () => {
         router.push(url); // Navigate to the selected route
     };
 
-    // const logOut = async () => {
-    //     const config = { method: "get" };
-    //     let response = await fetch("/api/login", config, { cache: "force-cache" });
-    //     let json = await response.json();
+    const logOut = async () => {
+        const config = { method: "get" };
+        let response = await fetch("/api/login", config, { cache: "force-cache" });
+        let json = await response.json();
 
-    //     if (json.status === "ok") {
-    //         toast.success("Log Out Success");
-    //         router.replace("/");
-    //     }
-    // };
+        if (json.status === "ok") {
+            toast.success("Log Out Success");
+            router.replace("/");
+        }
+    };
 
-    // const logIn = async () => {
-    //     router.replace("/login");
-    // };
+    const logIn = async () => {
+        router.replace("/login");
+    };
 
     return (
         <div>
@@ -87,7 +83,7 @@ const MainNavbar =async () => {
                         >
                             {Data.map((value) => (
                                 <li key={value._id}>
-                                    <Link href={value.link}  >
+                                    <Link href={value.link} className="justify-between">
                                         {value.name}
                                     </Link>
                                 </li>
@@ -105,13 +101,13 @@ const MainNavbar =async () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {Data.map((value) => (
-                            
-                                 <li key={value._id}>
-                                    <Link href={value.link}  >
+                             
+                               <li key={value._id}>
+                                    <Link href={value.link} className="justify-between">
                                         {value.name}
                                     </Link>
                                 </li>
-                            
+                             
                         ))}
                     </ul>
                 </div>
@@ -140,10 +136,10 @@ const MainNavbar =async () => {
                                 </Link>
                             </li>
                             <li>
-                                {/* <button onClick={logIn}>Log In</button> */}
+                                <button onClick={logIn}>Log In</button>
                             </li>
                             <li>
-                                {/* <button onClick={logOut}>Log Out</button> */}
+                                <button onClick={logOut}>Log Out</button>
                             </li>
                             <li>
                                 <Link href="/">Settings</Link>
