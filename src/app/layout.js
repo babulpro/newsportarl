@@ -26,8 +26,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="mb-16">
-
-          <MainNavbar/>
+ 
         </div>
         {children}
         <Footer/>
