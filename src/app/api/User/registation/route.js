@@ -8,6 +8,7 @@ import { User } from "@/app/lib/db/model/AllModel";
 
 export async function POST(req) {
   const data = await req.json();
+  console.log(data)
 
   // Password hashing
   const salt = await bcrypt.genSalt(10);

@@ -23,7 +23,7 @@ const Pages = ({Data}) => {
                                             <h2 className="card-title">{value.title}</h2>
                                             <p>{value.short_des}</p>
                                             <div className="card-actions justify-end">
-                                            <Link href={`/dashboard/pages/details/${value._id}`} className="btn btn-primary">Buy Now</Link>
+                                            <Link href={`/dashboard/pages/details/${value._id}`} className="btn btn-primary">Details</Link>
                                             </div>
                                         </div>
                                         </div>
