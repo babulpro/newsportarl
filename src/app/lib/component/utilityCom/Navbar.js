@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
 
-const MainNavbar = () => {
+const Navbar = () => {
     const router = useRouter();
     const [activePath, setActivePath] = useState(""); // Tracks the currently active path
     const [Data, setData] = useState([]);
@@ -120,11 +120,36 @@ const MainNavbar = () => {
                             className="input input-bordered w-24 md:w-auto"
                         />
                     </div>
-                     
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <Image src="/file.jpg" alt="Logo Image" width={300} height={200} />
+                            </div>
+                        </div>
+                        <ul
+                            tabIndex="0"
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                        >
+                            <li>
+                                <Link href="/dashboard/profile" className="justify-between">
+                                    Update
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={logIn}>Log In</button>
+                            </li>
+                            <li>
+                                <button onClick={logOut}>Log Out</button>
+                            </li>
+                            <li>
+                                <Link href="/">Settings</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default MainNavbar;
+export default Navbar;
