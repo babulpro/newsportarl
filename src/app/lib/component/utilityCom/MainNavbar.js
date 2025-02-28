@@ -3,25 +3,24 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import toast from "react-hot-toast";
 
 const MainNavbar = () => {
     const router = useRouter();
-    const [activePath, setActivePath] = useState(""); // Tracks the currently active path
+    const [activePath, setActivePath] = useState(""); 
     const [Data, setData] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchHeroData = async () => {
             try {
-                const response = await fetch("/api/getData/navbar", { cache: "force-cache" });
+                const response = await fetch("/api/getData/navbar", { cache: "no-store" });
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                setData(data.data); // Assuming the API sends `{ status: "ok", data: [...] }`
+                setData(data.data); 
             } catch (err) {
                 console.error("Error fetching navbar data:", err);
                 setError(err.message);
@@ -31,31 +30,11 @@ const MainNavbar = () => {
         fetchHeroData();
     }, []);
 
-    // Initialize the active path based on the current route
     useEffect(() => {
         setActivePath(window.location.pathname);
     }, []);
 
-    const handleNavClick = (url) => {
-        setActivePath(url); // Update the active path immediately
-        router.push(url); // Navigate to the selected route
-    };
-
-    const logOut = async () => {
-        const config = { method: "get" };
-        let response = await fetch("/api/login", config, { cache: "force-cache" });
-        let json = await response.json();
-
-        if (json.status === "ok") {
-            toast.success("Log Out Success");
-            router.replace("/");
-        }
-    };
-
-    const logIn = async () => {
-        router.replace("/login");
-    };
-
+ 
     return (
         <div>
             <div className="navbar bg-base-100 fixed top-0 z-50">
@@ -112,16 +91,6 @@ const MainNavbar = () => {
                     </ul>
                 </div>
 
-                <div className="navbar-end flex-none gap-2">
-                    <div className="form-control">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="input input-bordered w-24 md:w-auto"
-                        />
-                    </div>
-                     
-                </div>
             </div>
         </div>
     );

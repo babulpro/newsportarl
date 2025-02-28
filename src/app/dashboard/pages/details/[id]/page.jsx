@@ -1,12 +1,14 @@
 "use client";
 import Details from '@/app/lib/component/utilityCom/About';
 import Pages from '@/app/lib/component/utilityCom/Pages';
+import AllComments from '@/app/lib/component/utilityCom/user/Comments';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const Page = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [comment,setComment]=useState(null)
   let [type ,setType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,8 @@ const Page = () => {
   useEffect(() => {
     const fetchHeroData = async () => {
       try {
-        const response = await fetch(`/api/getData/newsDetails?id=${id}`, { cache: "force-cache" });
+        const response = await fetch(`/api/getData/newsDetails?id=${id}`);
+        const Allcomments = await fetch(`/api/getData/newsAllComments?id=${id}`);
         const newsData = await fetch(`/api/getData/news`,{cache:'force-cache'})
         
         if (!response.ok) {
@@ -24,8 +27,11 @@ const Page = () => {
 
         const result = await response.json();
         const news = await newsData.json();
+        const comments = await Allcomments.json()
+
         setData(result.data[0]);
         setType(result.data[0].type)
+        setComment(comments.data)
         setTypeData(news.data)
       } catch (err) {
         setError(err.message);
@@ -49,6 +55,7 @@ const Page = () => {
   return (
     <div>
         <Details data={data}/>
+         <AllComments data={comment} id={id}/>          
         <Pages Data={Data}/>
 
       

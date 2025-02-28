@@ -32,11 +32,11 @@ export async function POST(req) {
     let result = await Comment.find({userID:data.userID,postID:data.postID});
     if(result.length>0){
 
-        return NextResponse.json({ status: "success", msg:"already commented" }, { status: 200 });
+        return NextResponse.json({ status: "ok", msg:"already commented" }, { status: 200 });
     }
     let newresult = await Comment.create({...data})  
      
-      return NextResponse.json({ status: "success", msg: newresult}, { status: 404 });
+      return NextResponse.json({ status: "ok", msg: newresult}, { status: 404 });
     } 
     catch (error) {
     return NextResponse.json({ status: "error", msg: error.message }, { status: 500 });
