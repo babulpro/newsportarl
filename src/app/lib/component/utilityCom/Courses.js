@@ -11,7 +11,7 @@ const Courses = () => {
     useEffect(() => {
         const fetchHeroData = async () => {
             try {
-                const response = await fetch("/api/getData/news", { cache: "force-cache" });
+                const response = await fetch("/api/getData/news", { cache: "no-store" });
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +34,7 @@ const Courses = () => {
                         Data.length>0 &&
                         Data.map((value,index)=>{
                             return(
-                        <div key={value._id} className="card card-compact bg-base-100 w-96 shadow-xl">
+                        <div key={value._id} className="card card-compact bg-base-100 lg:w-96 shadow-xl">
                                         <figure>
                                             <img
                                             src={value.img1} />

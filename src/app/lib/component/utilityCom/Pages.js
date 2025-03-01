@@ -9,12 +9,12 @@ const Pages = ({Data}) => {
 
     return (
          
-                <div className="container m-auto bg-slate-800 py-10 grid lg:grid-cols-3 gap-3">
+                <div className="container m-auto bg-slate-800 py-10 grid md:grid-cols-3 gap-3">
                      {
                         Data.length>0 &&
                         Data.map((value,index)=>{
                             return(
-                        <div key={value._id} className="card card-compact bg-base-100 w-96 shadow-xl">
+                        <div key={value._id} className="card card-compact bg-base-100 lg:w-96 shadow-xl">
                                         <figure>
                                             <img
                                             src={value.img1} />

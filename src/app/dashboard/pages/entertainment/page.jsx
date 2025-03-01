@@ -10,7 +10,7 @@ const page = () => {
         useEffect(() => {
             const fetchHeroData = async () => {
                 try {
-                    const response = await fetch("/api/getData/news", { cache: "force-cache" });
+                    const response = await fetch("/api/getData/news", { cache: "no-store" });
     
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
